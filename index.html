@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JS_1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="1-javascript-%E5%9F%BA%E7%A4%8E%E6%96%87%E6%B3%951">1. JavaScript 基礎文法(1)</h1>
+<h2 id="%E2%97%86javascript-%E3%81%A8%E3%81%AF">◆JavaScript とは</h2>
+<p>クリックする際の挙動や地図の表示など、Web サイトに動的な機能を与える言語です。<br>
+ブラウザやアプリなど、ユーザに見える部分を<mark>フロントエンド</mark>、<br>
+サーバーやデータベースなどを<mark>バックエンド</mark>と言いますが、<br>
+近年の JavaScript はライブラリやフレームワークが豊富なため、<br>
+両方で活躍しています。今回はフロントエンド側を学習して行きます。</p>
+<img src="front_back.png">
+<br><br>
+<h2 id="%E2%97%86javascript-%E3%81%AE%E6%9B%B8%E3%81%8D%E6%96%B9">◆JavaScript の書き方</h2>
+<p>さっそくですが、JavaScript のコードを記述していきましょう。<br>
+今回は<mark>Runstant</mark>というツールを使います。</p>
+<blockquote>
+<p><a href="http://lite.runstant.com/" target="_blank">Runstant</a> &gt; <br></p>
+</blockquote>
+<p>Runstant は、ログイン不要で JavaScript を実行できる オンラインエディタです。<br>
+JavaScript のコーディングが簡単に行えるので、今後の演習で利用していきます。<br>
+まずは基本の「値の出力」を記述していきましょう。
+<br><br></p>
+<pre class="hljs"><code><div><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"テキスト"</span>); <span class="hljs-comment">// JavaScript はコンソールと呼ばれるエリアに結果が出力されます</span>
+</div></code></pre>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 1-1</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+1. Runstantを立ち上げ、SCRIPT エリア内のコードを削除し、上記のコードを記述する。<br>
+2. ▶ ボタンをクリック(または ctrl + S)を実行する。<br>
+3. 左下の CONSOLE エリアの結果を確認する。<br>
+※ Runstantには予測変換機能があるので、表示された際は Tabキーを押しましょう。
+</div>
+<p><br><br></p>
+<h2 id="%E2%97%86-%E5%9E%8B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%9D%E3%81%AE-1">◆ 型について(その 1)</h2>
+<p>プログラミングでは文字や数値など「データ型」と呼ばれるカテゴリーが定められています。<br>
+データ型は、その種類毎に表記法が決まっていて、例えば 文字列型は<mark> ' '(シングルクォート)</mark> か<br>
+<mark>&quot; &quot;(ダブルクォート) </mark>で囲みます。一方、数値型には囲いは不要です。<br>
+また、型のルールと異なる記述をすると、エラーが発生します。<br>
+以上を踏まえた上で、次の演習へ進みましょう。</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"テキスト"</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);
+
+<span class="hljs-built_in">console</span>.log(テキスト);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"3"</span>);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> + <span class="hljs-number">3</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"1+3"</span>);
+</div></code></pre>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 1-2</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを上から順番に Runstantで実行し、結果を確認しよう。
+</div>
+<p>エラー表示や数値として処理、文字列として処理される例を確認できたと思います。<br>
+次は、具体的な型の種類について学習しましょう。
+<br></p>
+<p><br><br></p>
+<h2 id="%E2%97%86-%E5%9E%8B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%9D%E3%81%AE-2">◆ 型について(その 2)</h2>
+<p>JavaScript のデータ型は大きく 5 つに分類されます。</p>
+<blockquote>
+<p>Number 型(数値)：実数、浮動小数、10 進数、16 進数などの数値。</p>
+<p>String 型(文字列)：テキストデータを表す型。表示の際は「' '」か「&quot; &quot;」で囲む</p>
+<p>Boolean 型(真偽値)：データが正しいかを True(真)か False(偽)で表す。</p>
+<p>Null 型(Null)：何のデータも含まれない状態。</p>
+<p>undefined 型：何も定義されていない状態。</p>
+</blockquote>
+<p>当面は、主に上 3 つを使用していきます。<br>
+JavaScript に限らず、型の理解は大切ですので、少しずつ慣れましょう。</p>
+<br>
+<pre class="hljs"><code><div><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-string">"text"</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-number">5</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">true</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>);
+</div></code></pre>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 1-3</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードをRunstantで実行し、結果を確認しましょう。<br>
+※ typeof は、データ型を判定する演算子です。
+</div>
+<br>
+<hr>
+<p>本章はここまでです。しばらくは基本的なコード演習が続きますが、<br>
+まずは JavaScript の記述に慣れていきましょう。</p>
+<p><br><br><br></p>
+<h1 id="2-javascript-%E5%9F%BA%E7%A4%8E%E6%96%87%E6%B3%952">2. JavaScript 基礎文法(2)</h1>
+<h2 id="%E2%97%86-%E6%BC%94%E7%AE%97%E5%AD%90">◆ 演算子</h2>
+<p>数学で用いられる + や - などの記号の事です。<br>
+一般的な数式の使い方と似ていますが、異なる部分もあるため、<br>
+注意して学習を進めましょう。</p>
+<br>
+<h3 id="%E3%83%BB%E7%AE%97%E8%A1%93%E6%BC%94%E7%AE%97%E5%AD%90">・算術演算子</h3>
+<p>四則演算と剰余算数が含まれます。(剰余算：割り切れない余りを求める)</p>
+<blockquote>
+<p>「+」：加算、「-」：減算、「/」：除算、「*」：乗算、「%」：剰余</p>
+</blockquote>
+<pre class="hljs"><code><div><span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> + <span class="hljs-number">2</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span> - <span class="hljs-number">1</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span> / <span class="hljs-number">2</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span> * <span class="hljs-number">3</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span> % <span class="hljs-number">2</span>);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"1"</span> + <span class="hljs-string">"2"</span>);
+</div></code></pre>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 2-1</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを Runstantで実行し、結果を確認しましょう。
+</div>
+<br>
+<p>算術演算子を実行するとその計算結果が出力されますが、以下に示す演算子は、<br>
+式が正しい または 誤っている の結果が Boolean 型(真偽値)として、<br>
+True または False で出力されます。</p>
+<br>
+<h3 id="%E3%83%BB%E9%96%A2%E4%BF%82%E6%BC%94%E7%AE%97%E5%AD%90">・関係演算子</h3>
+<p>左辺と右辺間の値の大小を比較します。</p>
+<blockquote>
+<p>[&gt;]：大なり<br> &gt; [&lt;]：小なり<br> &gt; [&gt;=]：以上(大なりイコール)<br> &gt; [&lt;=]：以下(小なりイコール)</p>
+</blockquote>
+<br>
+<h3 id="%E3%83%BB%E7%AD%89%E4%BE%A1%E6%BC%94%E7%AE%97%E5%AD%90">・等価演算子</h3>
+<p>左辺と右辺の式や値の一致・不一致を比較します。</p>
+<blockquote>
+<p>[==]：等しい<br> &gt; [!=]：等しくない</p>
+</blockquote>
+<br>
+<h3 id="%E3%83%BB%E8%AB%96%E7%90%86%E6%BC%94%E7%AE%97%E5%AD%90">・論理演算子</h3>
+<p>2 つの命題の真偽値から、成立する条件を定める演算子。</p>
+<blockquote>
+<p>[&amp;&amp;,and]：かつ、両方<br> &gt; [||,or]：または、いずれか</p>
+</blockquote>
+<br>
+<pre class="hljs"><code><div><span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> &lt; <span class="hljs-number">2</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span>);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> == <span class="hljs-number">1</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> != <span class="hljs-number">2</span>);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span> &amp;&amp; <span class="hljs-number">2</span> &lt; <span class="hljs-number">3</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> &lt; <span class="hljs-number">2</span> &amp;&amp; <span class="hljs-number">2</span> &lt; <span class="hljs-number">3</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span> || <span class="hljs-number">2</span> &lt; <span class="hljs-number">3</span>);
+</div></code></pre>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 2-2</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを Runstantで実行し、結果を確認しましょう。
+</div>
+<br>
+<h2 id="%E2%97%86-%E5%A4%89%E6%95%B0">◆ 変数</h2>
+<p>データ(値)を格納する事ができる、名前が付けられた「箱」のようなものを変数と言います。<br>
+格納された値は保存され、後から値を追加したり、上書きする事も可能です。</p>
+<pre class="hljs"><code><div>number = <span class="hljs-number">1</span>;
+</div></code></pre>
+<p>ここで用いられている「=」は数式の「イコール」とは異なります。<br>
+右辺の値を左辺の変数に代入しているため、イメージは下図のようになります。</p>
+<br>
+<img src="variable.png">
+<p>それでは実際にコードを記述していきましょう。</p>
+<pre class="hljs"><code><div>number = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(number);
+</div></code></pre>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 2-3</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを Runstantで実行し、結果を確認しましょう。
+</div>
+<br>
+<p>更にいくつかのコードを実行し、それぞれの動作を見ていきましょう。</p>
+<pre class="hljs"><code><div><span class="hljs-number">1</span>;
+number01 = <span class="hljs-number">1</span>;
+number02 = <span class="hljs-number">3</span>;
+<span class="hljs-built_in">console</span>.log(number01 + number02);
+
+<span class="hljs-number">2</span>;
+fruit = <span class="hljs-string">"Apple"</span>;
+color = <span class="hljs-string">"Red"</span>;
+<span class="hljs-built_in">console</span>.log(fruit + <span class="hljs-string">" is "</span> + color);
+</div></code></pre>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 2-4</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを Runstantで実行し、結果を確認しましょう。
+</div>
+<br>
+<p>(1)では 数値を格納した変数の算術演算<br>
+(2)では文字列を格納した変数の結合を確認しました。</p>
+<p><br><br></p>
+<hr>
+<p>本章はここまでです。演算子と変数を学び、少しずつ複雑な事が出来るようになってきました。<br>
+次も頑張りましょう！</p>
+<p><br><br><br></p>
+<h1 id="3-javascript-%E5%9F%BA%E7%A4%8E%E6%96%87%E6%B3%953">3. JavaScript 基礎文法(3)</h1>
+<h2 id="%E2%97%86-%E5%88%9D%E6%9C%9F%E5%8C%96%E3%81%A8%E5%86%8D%E4%BB%A3%E5%85%A5">◆ 初期化と再代入</h2>
+<p>変数に値を格納する際、宣言と共に値を入れる事を「初期化」、<br>
+生成済みの変数に改めて値を入れる事を「再代入」といいます。</p>
+<pre class="hljs"><code><div>dollar = <span class="hljs-number">105</span>;
+dollar = <span class="hljs-number">110</span>;
+dollar = <span class="hljs-number">107</span>;
+<span class="hljs-built_in">console</span>.log(dollar);
+</div></code></pre>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 3-1</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを Runstantで確認しましょう。
+</div>
+<br>
+<p>また、変数そのものも代入が可能です。<br><br></p>
+<pre class="hljs"><code><div>x = <span class="hljs-number">1</span>;
+x = x + <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(x);
+</div></code></pre>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 3-2</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを Runstantで確認しましょう。
+</div>
+<br>
+<p>値を格納した変数を、さらに同じ変数に代入という考え方は少し分かり辛いです。<br>
+以下のイメージ図を参考に、ゆっくり理解していきましょう。</p>
+<br>
+<img src="variable02.png">
+<br>
+<p>上記の記述は以下のように書き換えが可能です。</p>
+<pre class="hljs"><code><div>x = <span class="hljs-number">1</span>;
+x += <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(x);
+</div></code></pre>
+<p>よく用いられる記述方法なので、慣れていきましょう。</p>
+<p><br><br></p>
+<h2 id="%E2%97%86-%E5%A4%89%E6%95%B0%E3%81%AE%E5%AE%A3%E8%A8%80">◆ 変数の宣言</h2>
+<p>変数に値を格納する前に、変数の宣言が可能です。ES2015 以降の JavaScript では、<br>
+let と const が利用出来ます。let は再宣言が不可となり、const は再代入が不可となります。<br>
+const の方がより強力で、宣言後は「変数」ではなく「定数」となります。
+<br></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> only_one = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">let</span> only_one = <span class="hljs-number">2</span>;
+<span class="hljs-built_in">console</span>.log(only_one);
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> number = <span class="hljs-number">1</span>;
+number = <span class="hljs-number">2</span>;
+<span class="hljs-built_in">console</span>.log(number);
+</div></code></pre>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 3-3</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを実行し、結果を確認しましょう。
+</div>
+<p>また let と const 以外に、JavaScript では var という宣言が用いられていました。<br>
+そのため参考書や記事、フレームワークのマニュアルに var が用いられる事があります。<br>
+注意しましょう。</p>
+<br>
+<h2 id="%E2%97%86-%E3%82%A4%E3%83%B3%E3%82%AF%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88%E3%81%A8%E3%83%87%E3%82%AF%E3%83%AA%E3%83%A1%E3%83%B3%E3%83%88">◆ インクリメントとデクリメント</h2>
+<p>数値に 1 ずつ追加させる処理をインクリメント、1 ずつ減らす処理をデクリメントといいます。<br>
+インクリメントが「変数++」デクリメントが「変数--」と記述します。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;
+i++;
+<span class="hljs-built_in">console</span>.log(i);
+
+<span class="hljs-keyword">let</span> j = <span class="hljs-number">2</span>;
+j--;
+<span class="hljs-built_in">console</span>.log(j);
+</div></code></pre>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 3-4</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを実行し、確認しましょう。
+</div>
+<p>この記述方法もよく使いますので、覚えておくとよいでしょう。</p>
+<br>
+<br>
+<hr>
+本章はここまでです。変数に値を格納するだけでもいくつかルールがあります。  
+1つずつ覚えていきましょう。
+<p><br><br><br></p>
+<h1 id="4-javascript-%E5%9F%BA%E7%A4%8E%E6%96%87%E6%B3%954">4. JavaScript 基礎文法(4)</h1>
+<h2 id="%E2%97%86if-%E6%96%87">◆if 文</h2>
+<p>プログラミングは原則、上から下へ順番に処理が流れますが、条件によって処理を分ける事ができます。<br>
+「もし〇〇なら A を実行する」といった形で、条件毎の処理を設定する記述法を<mark>条件分岐</mark>といいます。<br>
+その 1 つが if 文で、以下のように記述します。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (条件式) {
+  実行処理;
+}
+</div></code></pre>
+<br>
+<p>if 文の ( ) 内の条件が正しければ、(真偽値が True であれば)処理が実行されます。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (<span class="hljs-number">2</span> &gt; <span class="hljs-number">1</span>) {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"2は1より大きい"</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span> &gt; <span class="hljs-number">1</span>);
+}
+</div></code></pre>
+<br>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 4-1</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+上記のコードを Runstantで実行し、結果を確認しましょう。
+</div>
+<p><br><br></p>
+<p>条件が複数ある場合は、else if を用いる事で記述が可能です。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (条件式A) {
+  実行処理A;
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (条件式B) {
+  実行処理B;
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (条件式C) {
+  実行処理C;
+} <span class="hljs-keyword">else</span> {
+  実行処理D;
+}
+</div></code></pre>
+<p>最後の else は 条件式 A ～ C までに当てはまらなかった全ての場合を含むため、条件式は不要です。<br>
+また、if 文内の条件式の記述は可読性を上げるため、Tab キー 1 回分の字下げを実行します。
+<br><br></p>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:lightgreen; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">演習 4-2</span>
+</div>
+<div style="border:2px solid lightgreen; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+以下の条件を満たすif文を作成し、処理を実行しましょう。<br>
+1. 変数scoreに0～100の範囲で任意の値を格納<br>
+2. scoreが以下の条件の時にそれそれの判定を出力させる<br>
+  > 85以上：優、70以上：良、60以上：可、60未満：不可<br>
+3. if文を記述後、処理を実行して結果を確認する<br>
+4. 時間があれば、scoreの値を変えて実行結果を試す<br>
+</div>
+<br>
+<p><br><br></p>
+<h2 id="%E2%97%86-%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88">◆ コメント</h2>
+<p>プログラムとして実行されない、コード上に記載できる注釈文の事。言語で記述方法が異なり、<br>
+JavaScript では「//」または「/* */」で記述します。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// この 1行はコードに反映されない</span>
+
+<span class="hljs-comment">/* ↓ ここから
+
+   ↑ ここまでのコードは反映されない */</span>
+</div></code></pre>
+<p>記述したコードが上手く動かない場合など、一部のコードをコメントにして原因の箇所を確認する事があります。<br>
+このような操作をコメントアウトといいます。</p>
+<p><br><br></p>
+<div style="height:12px;">
+<span style="margin-left:8px; padding:6px 10px; background:#ff9933; color:black; font-weight:bold;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">総合演習</span>
+</div>
+<div style="border:2px solid #ff9933; padding:25px 12px 10px; font-size:0.85em;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;">
+次の結果を出力するコードを作成しましょう。<br>
+・100円/個のリンゴ 5個と、80円/個のみかん 10個の合計金額を計算する。<br>
+・計算結果を「合計金額：〇〇円」と表示する。<br>
+・もし合計金額が1000円を超えたら、5%値引きする<br>
+※難しい場合は、以下のコメントを参照し、コードを記述していきましょう。
+</div>
+<pre class="hljs"><code><div><span class="hljs-comment">//変数 apple_priceとorange_priceに値段を格納(constで宣言)</span>
+
+<span class="hljs-comment">//変数number_a, number_oに購入数を格納(letで宣言)</span>
+
+<span class="hljs-comment">//変数total_price にリンゴとみかんの合計金額の計算を格納</span>
+
+<span class="hljs-comment">//if文で合計金額が 1000円以上とそれ以外の場合の出力結果を場合分けする。</span>
+</div></code></pre>
+<p><br><br></p>
+<hr>
+<p>本章はここまでです。<img class="emoji" alt="pencil2" src="data:image/png;base64,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" /><br>
+お疲れ様でした！</p>
+<p><a href="https://masashi-m.github.io/text_htmlcss_02/">JavaScript 学習テキスト(2)へ</a></p>
+
+</body>
+</html>
